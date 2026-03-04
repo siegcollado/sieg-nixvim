@@ -29,6 +29,28 @@
           command_palette = true;
           long_message_to_split = true;
         };
+        # cmdline = {
+        #   enabled = true;
+        #   format = {
+        #     cmdline = {
+        #       icon = " ";
+        # hl_group = "DiagnosticInfo";
+        # firstc = false;
+        # };
+        # search_down = {
+        #   icon = " ";
+        #   hl_group = "DiagnosticWarn";
+        # };
+        # search_up = {
+        #   icon = " ";
+        #   hl_group = "DiagnosticWarn";
+        # };
+        # help = {
+        #   icon = "? ";
+        #   hl_group = "DiagnosticQuestion";
+        # };
+        #   };
+        # };
       };
     };
     nui.enable = true;
@@ -38,25 +60,25 @@
         desc = "Noice Keymaps (which-key)";
       }
     ];
-  };
 
-  # Add Noice highlight groups to transparent plugin
-  plugins.transparent = lib.mkIf config.transparent {
-    settings.extra_groups = [
-      "NoiceMini"
-      "NoiceLspProgressTitle"
-      "NoiceLspProgressClient"
-      "NoiceLspProgressSpinner"
-    ];
+    # Add Noice highlight groups to transparent plugin
+    transparent = lib.mkIf config.transparent {
+      settings.extra_groups = [
+        "NoiceMini"
+        "NoiceLspProgressTitle"
+        "NoiceLspProgressClient"
+        "NoiceLspProgressSpinner"
+      ];
+    };
   };
 
   # Noice border colors from theme
   highlightOverride = {
     # NoicePopupBorder = {
-    #   fg = config.plugins.mini.modules.base16.palette.base01;
+    #   fg = config.colorschemes.mini-base16.settings.palette.base01;
     # };
     # NoiceCmdlinePopupBorder = {
-    #   fg = config.plugins.mini.modules.base16.palette.base01;
+    #   fg = config.colorschemes.mini-base16.settings.palette.base01;
     # };
   };
 

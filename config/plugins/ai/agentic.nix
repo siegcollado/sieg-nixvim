@@ -112,36 +112,36 @@ in
   # Agentic highlight groups using mini.base16 colors (nix-land)
   highlightOverride = {
     AgenticTitle = {
-      bg = config.plugins.mini.modules.base16.palette.base0D;
-      fg = config.plugins.mini.modules.base16.palette.base00;
+      bg = config.colorschemes.mini-base16.settings.palette.base0D;
+      fg = config.colorschemes.mini-base16.settings.palette.base00;
       bold = true;
     };
     AgenticSpinnerGenerating = {
-      fg = config.plugins.mini.modules.base16.palette.base0D;
+      fg = config.colorschemes.mini-base16.settings.palette.base0D;
       bold = true;
     };
     AgenticSpinnerThinking = {
-      fg = config.plugins.mini.modules.base16.palette.base0E;
+      fg = config.colorschemes.mini-base16.settings.palette.base0E;
       bold = true;
     };
     AgenticSpinnerSearching = {
-      fg = config.plugins.mini.modules.base16.palette.base0A;
+      fg = config.colorschemes.mini-base16.settings.palette.base0A;
       bold = true;
     };
     AgenticSpinnerBusy = {
       link = "Comment";
     };
     AgenticStatusPending = {
-      bg = config.plugins.mini.modules.base16.palette.base0E;
-      fg = config.plugins.mini.modules.base16.palette.base00;
+      bg = config.colorschemes.mini-base16.settings.palette.base0E;
+      fg = config.colorschemes.mini-base16.settings.palette.base00;
     };
     AgenticStatusCompleted = {
-      bg = config.plugins.mini.modules.base16.palette.base0B;
-      fg = config.plugins.mini.modules.base16.palette.base00;
+      bg = config.colorschemes.mini-base16.settings.palette.base0B;
+      fg = config.colorschemes.mini-base16.settings.palette.base00;
     };
     AgenticStatusFailed = {
-      bg = config.plugins.mini.modules.base16.palette.base08;
-      fg = config.plugins.mini.modules.base16.palette.base00;
+      bg = config.colorschemes.mini-base16.settings.palette.base08;
+      fg = config.colorschemes.mini-base16.settings.palette.base00;
     };
   };
 

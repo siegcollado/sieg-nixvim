@@ -4,6 +4,8 @@
     incline-nvim
   ];
 
+  # globals.opts.showtabline = 0;
+
   extraConfigLua = ''
     local path = require("utils.path")
     local root = require("utils.root")
@@ -21,7 +23,7 @@
         overlap = {
           winbar = true,
           statusline = true,
-          tabline = false,
+          tabline = true,
           borders = true,
         },
       },
@@ -29,7 +31,7 @@
         groups = {
           InclineNormal = {
             default = true,
-            group = "Comment",
+            group = "Normal",
           },
           InclineNormalNC = {
             default = true,

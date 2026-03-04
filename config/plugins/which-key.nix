@@ -103,7 +103,7 @@
   # WhichKey border colors from theme
   highlightOverride = {
     WhichKeyBorder = {
-      fg = config.plugins.mini.modules.base16.palette.base01;
+      fg = config.colorschemes.mini-base16.settings.palette.base01;
     };
   };
 

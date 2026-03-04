@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   plugins.snacks = {
     enable = true;
@@ -24,6 +24,18 @@
       };
       words = {
         enable = true;
+      };
+
+      lazygit.config.os = {
+        editPreset = "nvim-remote";
+        # 1. Close the floating window
+        # 2. Open the file in the existing buffer
+        edit = lib.strings.join " " [
+          "nvim --server $NVIM --remote-send '<C-\\><C-n><cmd>close<cr>'"
+          "&&"
+          "${lib.getExe pkgs.neovim-remote} --remote {{filename}}"
+        ];
+        editInTerminal = false;
       };
 
       picker = {

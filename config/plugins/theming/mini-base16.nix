@@ -2,15 +2,10 @@
 {
   config = {
     # mini.base16.palette is the source of truth
-    plugins.mini = {
+    colorschemes.mini-base16 = {
       enable = true;
-      modules = {
-        base16 = {
-          inherit (config) palette;
-
-          use_cterm = true;
-        };
-        colors = { };
+      settings = {
+        inherit (config) palette;
       };
     };
 
@@ -18,7 +13,8 @@
     highlightOverride = {
       # Floating window borders (general)
       FloatBorder = {
-        fg = config.plugins.mini.modules.base16.palette.base01;
+        # TODO: dont call from this setting directly.
+        fg = config.colorschemes.mini-base16.settings.palette.base01;
       };
     };
 

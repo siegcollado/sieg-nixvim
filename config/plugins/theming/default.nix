@@ -9,6 +9,7 @@
     palette = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
       default = {
+        # just do nord
         base00 = "#2e3440"; # Default background
         base01 = "#3b4252"; # Lighter background / dark grey
         base02 = "#434c5e"; # Selection background

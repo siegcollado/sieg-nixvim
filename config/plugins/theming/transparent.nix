@@ -30,6 +30,12 @@
       extra_groups = [
         "NormalFloat"
         "StatusLine"
+        "WinSeparator"
+
+        "DiagnosticSignWarn"
+        "DiagnosticSignOk"
+        "DiagnosticSignError"
+        "DiagnosticSignInfo"
       ];
     };
   };
