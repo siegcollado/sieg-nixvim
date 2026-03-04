@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ config, ... }:
 {
   config = {
     # mini.base16.palette is the source of truth
@@ -7,6 +7,8 @@
       modules = {
         base16 = {
           inherit (config) palette;
+
+          use_cterm = true;
         };
         colors = { };
       };

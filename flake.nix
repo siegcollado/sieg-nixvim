@@ -5,6 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixvim.url = "github:nix-community/nixvim";
     flake-parts.url = "github:hercules-ci/flake-parts";
+
+    # nix plugins not in nixpkgs
     exrc-nvim = {
       url = "github:jedrzejboczar/exrc.nvim";
       flake = false;

@@ -158,10 +158,12 @@
         "grug-far"
         "startuptime"
         "tsplayground"
+
         "neotest-output"
-        "checkhealth"
-        "neotest-summary"
         "neotest-output-panel"
+        "neotest-summary"
+
+        "checkhealth"
         "dbout"
         "gitsigns-blame"
       ];
