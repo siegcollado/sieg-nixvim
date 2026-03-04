@@ -385,6 +385,206 @@
       '';
       options.desc = "Inspect Tree";
     }
+
+    # search
+    {
+      mode = "n";
+      key = "<leader>sb";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.lines() end'';
+      options.desc = "Buffer Lines";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sg";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.grep() end'';
+      options.desc = "Grep (Root Dir)";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sB";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.grep_buffers() end'';
+      options.desc = "Grep Open Buffers";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sG";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.grep({ root = false }) end'';
+      options.desc = "Grep (cwd)";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sp";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.lazy() end'';
+      options.desc = "Search for Plugin Spec";
+    }
+
+    {
+      mode = [
+        "n"
+        "x"
+      ];
+      key = "<leader>sw";
+      action = lib.nixvim.mkRaw ''
+        function()
+          local visual = vim.fn.visualmode()
+          if visual then
+            require("snacks").picker.grep({ visual = true })
+          else
+            require("snacks").picker.grep({ word = true })
+          end
+        end
+      '';
+      options.desc = "Visual selection or word (Root Dir)";
+    }
+
+    {
+      mode = [
+        "n"
+        "x"
+      ];
+      key = "<leader>sW";
+      action = lib.nixvim.mkRaw ''
+        function()
+          local visual = vim.fn.visualmode()
+          if visual then
+            require("snacks").picker.grep({ visual = true, root = false })
+          else
+            require("snacks").picker.grep({ word = true, root = false })
+          end
+        end
+      '';
+      options.desc = "Visual selection or word (cwd)";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>s\"";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.registers() end'';
+      options.desc = "Registers";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>s/";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.search_history() end'';
+      options.desc = "Search History";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sa";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.autocmds() end'';
+      options.desc = "Autocmds";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sc";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.command_history() end'';
+      options.desc = "Command History";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sC";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.commands() end'';
+      options.desc = "Commands";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sd";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.diagnostics() end'';
+      options.desc = "Diagnostics";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sD";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.diagnostics_buffer() end'';
+      options.desc = "Buffer Diagnostics";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sh";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.help() end'';
+      options.desc = "Help Pages";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sH";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.highlights() end'';
+      options.desc = "Highlights";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>si";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.icons() end'';
+      options.desc = "Icons";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sj";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.jumps() end'';
+      options.desc = "Jumps";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sk";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.keymaps() end'';
+      options.desc = "Keymaps";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sl";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.loclist() end'';
+      options.desc = "Location List";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sM";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.man() end'';
+      options.desc = "Man Pages";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sm";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.marks() end'';
+      options.desc = "Marks";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sR";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.resume() end'';
+      options.desc = "Resume";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>sq";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.qflist() end'';
+      options.desc = "Quickfix List";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>su";
+      action = lib.nixvim.mkRaw ''function() require("snacks").picker.undo() end'';
+      options.desc = "Undo";
+    }
   ];
 
   # NOTE: Toggle mappings for <leader>u* should live in which-key.nix or dedicated Lua file

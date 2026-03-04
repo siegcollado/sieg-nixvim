@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   extraPlugins = with pkgs.vimPlugins; [
     incline-nvim

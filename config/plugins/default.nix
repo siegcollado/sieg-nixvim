@@ -1,11 +1,12 @@
 {
   imports = [
+    ./ai # ai plugins
+    ./coding # coding support
+    ./theming # theming
+
     ./aerial.nix
-    ./agentic.nix
     ./blink.nix
     ./bufferline.nix
-    ./conform.nix
-    ./copilot.nix
     ./edgy.nix
     ./exrc.nix
     ./flash.nix
@@ -13,9 +14,6 @@
     ./grug-far.nix
     ./harpoon.nix
     ./incline.nix
-    ./lazydev.nix
-    ./lint.nix
-    ./lsp.nix
     ./lualine.nix
     ./mini-ai.nix
     ./mini-icons.nix
@@ -31,7 +29,6 @@
     ./snacks.nix
     ./symbols-outline.nix
     ./telescope.nix
-    ./theme.nix
     ./todo-comments.nix
     ./treesitter.nix
     ./treesj.nix

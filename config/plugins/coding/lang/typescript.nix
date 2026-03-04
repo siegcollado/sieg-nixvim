@@ -1,12 +1,33 @@
 { lib, ... }:
+let
+  biomeOrPrettier = lib.nixvim.mkRaw ''
+    function(bufnr)
+      local root = require("utils.root")
+      local has_biome_config = root.has_pattern(bufnr, { "biome.json", "biome.jsonc", "biome.yaml", "biome.yml" })
+      if has_biome_config then
+        return { "biome" }
+      end
+      return { "prettier" }
+    end
+  '';
+in
 {
-  plugins.lint = {
-    enable = true;
-    lintersByFt = {
-      nix = [ "statix" ];
-    };
+  plugins.conform-nvim.settings.formatters_by_ft = {
+    javascript = biomeOrPrettier;
+    javascriptreact = biomeOrPrettier;
+    typescript = biomeOrPrettier;
+    typescriptreact = biomeOrPrettier;
+
+    # TODO: move me to json.nix?
+    json = biomeOrPrettier;
+    jsonc = biomeOrPrettier;
   };
 
+  # NOTE: apparently this is slow on large projects, consider using another
+  # plugin
+  plugins.lsp.servers.ts_ls.enable = true;
+
+  # TODO: move this to json.nix as well?
   extraConfigLua = ''
     local lint = require("lint")
     local root = require("utils.root")

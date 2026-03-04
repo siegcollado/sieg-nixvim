@@ -99,14 +99,6 @@
     }
   ];
 
-  # Add which-key group
-  plugins.which-key.settings.spec = lib.mkAfter [
-    {
-      __unkeyed-1 = "<leader>c";
-      group = "+code";
-    }
-  ];
-
   # Add aerial highlight groups to transparent plugin
   plugins.transparent = lib.mkIf config.transparent {
     settings.extra_groups = [
