@@ -5,7 +5,7 @@
     colorschemes.mini-base16 = {
       enable = true;
       settings = {
-        inherit (config) palette;
+        inherit (config.sieg-nixvim.theme) palette;
       };
     };
 

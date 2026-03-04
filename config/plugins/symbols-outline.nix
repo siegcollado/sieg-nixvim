@@ -137,7 +137,7 @@
   ];
 
   # Add outline highlight groups to transparent plugin
-  plugins.transparent = lib.mkIf config.transparent {
+  plugins.transparent = lib.mkIf config.sieg-nixvim.theme.transparent {
     settings.extra_groups = [
       "Outline"
     ];

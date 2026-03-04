@@ -1,6 +1,6 @@
 { lib, config, ... }:
 {
-  plugins.transparent = lib.mkIf config.transparent {
+  plugins.transparent = lib.mkIf config.sieg-nixvim.theme.transparent {
     enable = true;
     settings = {
       groups = [

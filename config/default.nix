@@ -1,6 +1,7 @@
 {
   imports = [
     ./options.nix
+    ./sieg-nixvim/options
     ./autocmds.nix
     ./diagnostics.nix
     ./keymaps

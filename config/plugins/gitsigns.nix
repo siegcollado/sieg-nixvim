@@ -97,7 +97,7 @@
     ];
 
     # Add GitSigns highlight groups to transparent plugin
-    transparent = lib.mkIf config.transparent {
+    transparent = lib.mkIf config.sieg-nixvim.theme.transparent {
       settings.extra_groups = [
         "GitSignsAdd"
         "GitSignsChange"
