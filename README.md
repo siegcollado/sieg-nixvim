@@ -36,6 +36,22 @@ Flake usage:
 }
 ```
 
+Minimal downstream usage with overlays handled for you:
+
+```nix
+myNixvim = sieg-nixvim.lib.mkNixvimConfig {
+  system = pkgs.system;
+  modules = [
+    {
+      sieg-nixvim.theme.palette = config.lib.stylix.colors.withHashtag;
+      sieg-nixvim.theme.transparent = config.stylix.opacity.terminal < 1.0;
+    }
+  ];
+};
+
+home.packages = [ myNixvim.config.build.package ];
+```
+
 Home Manager usage:
 
 ```nix
@@ -63,4 +79,31 @@ Home Manager usage:
     };
   };
 }
+```
+
+### Stylix integration
+
+When using Stylix, disable its Nixvim target to avoid conflicting theme settings,
+then pass palette/transparent values to sieg-nixvim:
+
+```nix
+stylix.targets.nixvim.enable = false;
+
+sieg-nixvim.theme.palette = config.lib.stylix.colors.withHashtag;
+sieg-nixvim.theme.transparent = config.stylix.opacity.terminal < 1.0;
+```
+
+If you build your config with `evalNixvim`, pass the overrides directly:
+
+```nix
+myNixvim = nixvim.lib.evalNixvim {
+  system = pkgs.system;
+  modules = [
+    sieg-nixvim.nixvimModules.default
+    {
+      sieg-nixvim.theme.palette = config.lib.stylix.colors.withHashtag;
+      sieg-nixvim.theme.transparent = config.stylix.opacity.terminal < 1.0;
+    }
+  ];
+};
 ```

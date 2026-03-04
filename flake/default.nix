@@ -2,8 +2,31 @@
   inputs,
   lib,
   self,
+  config,
+  withSystem,
   ...
 }:
+let
+  mkNixvimConfig =
+    {
+      system,
+      modules ? [ ],
+    }:
+    let
+      pkgs = import inputs.nixpkgs {
+        inherit system;
+        overlays = [ self.overlays.default ];
+      };
+    in
+    inputs.nixvim.lib.evalNixvim {
+      inherit system;
+      modules = [
+        { nixpkgs.pkgs = pkgs; }
+        (import ../config)
+      ]
+      ++ modules;
+    };
+in
 {
   imports = [
     ./overlays.nix
@@ -11,6 +34,12 @@
 
   flake = {
     nixvimModules.default = ../config;
+    lib = {
+      inherit mkNixvimConfig;
+    };
+    nixvimConfigurations = lib.genAttrs config.systems (
+      system: withSystem system ({ ... }: mkNixvimConfig { inherit system; })
+    );
   };
 
   perSystem =
