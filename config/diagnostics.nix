@@ -1,16 +1,21 @@
 {
-  extraConfigLua = ''
-    local icons = require("utils.icons").diagnostics
-
-    vim.diagnostic.config({
-      signs = {
-        text = {
-          [vim.diagnostic.severity.ERROR] = icons.Error,
-          [vim.diagnostic.severity.WARN] = icons.Warn,
-          [vim.diagnostic.severity.HINT] = icons.Hint,
-          [vim.diagnostic.severity.INFO] = icons.Info,
-        },
-      },
-    })
-  '';
+  diagnostic.settings = {
+    underline = true;
+    update_in_insert = false;
+    severity_sort = true;
+    signs = {
+      text = {
+        "ERROR" = " ";
+        "WARN" = " ";
+        "HINT" = " ";
+        "INFO" = " ";
+      };
+    };
+    virtual_text = {
+      spacing = 4;
+      source = "if_many";
+      prefix = "● ";
+      virt_text_pos = "right_align";
+    };
+  };
 }

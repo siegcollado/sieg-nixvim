@@ -57,5 +57,14 @@ in
       action = lib.nixvim.mkRaw ''function() require("conform").format({ formatters = { "injected" }, timeout_ms = 3000 }) end'';
       options.desc = "Format Injected Langs";
     }
+    {
+      mode = [
+        "n"
+        "x"
+      ];
+      key = "<leader>cf";
+      action = lib.nixvim.mkRaw ''function() require("conform").format({ lsp_fallback = true }) end'';
+      options.desc = "Format";
+    }
   ];
 }

@@ -1,7 +1,36 @@
-{ lib, ... }:
+{ lib, config, ... }:
 {
   plugins = {
-    noice.enable = true;
+    noice = {
+      enable = true;
+      settings = {
+        lsp = {
+          override = {
+            "vim.lsp.util.convert_input_to_markdown_lines" = true;
+            "vim.lsp.util.stylize_markdown" = true;
+            "cmp.entry.get_documentation" = true;
+          };
+        };
+        routes = [
+          {
+            filter = {
+              event = "msg_show";
+              any = [
+                { find = "%d+L, %d+B"; }
+                { find = "; after #%d+"; }
+                { find = "; before #%d+"; }
+              ];
+            };
+            view = "mini";
+          }
+        ];
+        presets = {
+          bottom_search = true;
+          command_palette = true;
+          long_message_to_split = true;
+        };
+      };
+    };
     nui.enable = true;
     which-key.settings.spec = [
       {
@@ -9,6 +38,26 @@
         desc = "Noice Keymaps (which-key)";
       }
     ];
+  };
+
+  # Add Noice highlight groups to transparent plugin
+  plugins.transparent = lib.mkIf config.transparent {
+    settings.extra_groups = [
+      "NoiceMini"
+      "NoiceLspProgressTitle"
+      "NoiceLspProgressClient"
+      "NoiceLspProgressSpinner"
+    ];
+  };
+
+  # Noice border colors from theme
+  highlightOverride = {
+    # NoicePopupBorder = {
+    #   fg = config.plugins.mini.modules.base16.palette.base01;
+    # };
+    # NoiceCmdlinePopupBorder = {
+    #   fg = config.plugins.mini.modules.base16.palette.base01;
+    # };
   };
 
   keymaps = [
@@ -89,7 +138,4 @@
       options.desc = "Redirect Cmdline";
     }
   ];
-
-  # Note: The which-key group for "<leader>sn" should be added to which-key.nix
-  # The require("noice").setup() call is handled automatically by Nixvim
 }

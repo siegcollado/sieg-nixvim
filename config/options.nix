@@ -3,7 +3,8 @@
     mapleader = " ";
     maplocalleader = "\\";
     autoformat = true;
-    snacks_animate = false;
+    snacks_animate = false; # Keep false - user prefers no animations
+    ai_cmp = true; # Use AI source in completion instead of inline suggestions
     root_spec = [
       "lsp"
       [
@@ -38,7 +39,8 @@
       eob = " ";
     };
     foldlevel = 99;
-    foldmethod = "indent";
+    foldmethod = "expr";
+    foldexpr = "v:lua.vim.lsp.foldexpr()";
     foldtext = "";
     formatoptions = "jcroqlnt";
     grepformat = "%f:%l:%c:%m";
@@ -70,6 +72,7 @@
     shiftround = true;
     shiftwidth = 2;
     showmode = false;
+    showcmd = false;
     sidescrolloff = 8;
     signcolumn = "yes";
     smartcase = true;
@@ -81,6 +84,7 @@
     splitright = true;
     tabstop = 2;
     termguicolors = true;
+    title = false;
     undofile = true;
     undolevels = 10000;
     updatetime = 200;
@@ -90,9 +94,11 @@
     wrap = false;
   };
 
-  extraConfigLua = ''
+  # Runtime-dependent options
+  extraConfigLuaPre = ''
     vim.opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus"
     vim.opt.timeoutlen = vim.g.vscode and 1000 or 300
     vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
+    vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
   '';
 }

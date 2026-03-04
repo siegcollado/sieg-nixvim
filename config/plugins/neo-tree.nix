@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, config, ... }:
 {
   plugins.neo-tree = {
     enable = true;
@@ -45,9 +45,7 @@
               desc = "Open with System Application",
             }
           '';
-          "P" = {
-            __raw = ''{ "toggle_preview", config = { use_float = false } }'';
-          };
+          "P" = lib.nixvim.mkRaw ''{ "toggle_preview", config = { use_float = false } }'';
         };
       };
 
@@ -187,5 +185,14 @@
     Neotree_start_directory = {
       clear = true;
     };
+  };
+
+  # Add Neo-tree highlight groups to transparent plugin
+  plugins.transparent = lib.mkIf config.transparent {
+    settings.extra_groups = [
+      "NeoTreeNormal"
+      "NeoTreeNormalNC"
+      "NeoTreeSignColumn"
+    ];
   };
 }

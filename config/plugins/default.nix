@@ -1,10 +1,13 @@
 {
   imports = [
-    ./avante.nix
+    ./aerial.nix
+    ./agentic.nix
     ./blink.nix
     ./bufferline.nix
     ./conform.nix
     ./copilot.nix
+    ./edgy.nix
+    ./exrc.nix
     ./flash.nix
     ./gitsigns.nix
     ./grug-far.nix
@@ -12,7 +15,7 @@
     ./incline.nix
     ./lazydev.nix
     ./lint.nix
-    ./lspconfig.nix
+    ./lsp.nix
     ./lualine.nix
     ./mini-ai.nix
     ./mini-icons.nix
@@ -23,8 +26,10 @@
     ./nui.nix
     ./nvim-tmux-navigation.nix
     ./oil.nix
+    ./overseer.nix
     ./persistence.nix
     ./snacks.nix
+    ./symbols-outline.nix
     ./telescope.nix
     ./theme.nix
     ./todo-comments.nix

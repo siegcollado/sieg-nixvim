@@ -3,11 +3,12 @@
     ./options.nix
     ./autocmds.nix
     ./diagnostics.nix
-    ./keymaps.nix
+    ./keymaps
     ./plugins
   ];
 
   extraFiles = {
+    "lua/utils/colors.lua".source = ./lua/utils/colors.lua;
     "lua/utils/features.lua".source = ./lua/utils/features.lua;
     "lua/utils/icons.lua".source = ./lua/utils/icons.lua;
     "lua/utils/root.lua".source = ./lua/utils/root.lua;

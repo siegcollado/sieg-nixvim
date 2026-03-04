@@ -1,10 +1,11 @@
+{ lib, ... }:
 {
   plugins = {
     bufferline = {
-      enable = true;
+      enable = false;
       settings = {
         options = {
-          close_command.__raw = ''
+          close_command = lib.nixvim.mkRaw ''
             function(n)
               local ok, snacks = pcall(require, "snacks")
               if ok and snacks.bufdelete then
@@ -14,7 +15,7 @@
               vim.cmd("bdelete " .. n)
             end
           '';
-          right_mouse_command.__raw = ''
+          right_mouse_command = lib.nixvim.mkRaw ''
             function(n)
               local ok, snacks = pcall(require, "snacks")
               if ok and snacks.bufdelete then
@@ -26,7 +27,7 @@
           '';
           diagnostics = "nvim_lsp";
           always_show_bufferline = false;
-          diagnostics_indicator.__raw = ''
+          diagnostics_indicator = lib.nixvim.mkRaw ''
             function(_, _, diag)
               local icons = require("utils.icons").diagnostics
               local ret = (diag.error and icons.Error .. diag.error .. " " or "")
@@ -45,7 +46,7 @@
               filetype = "snacks_layout_box";
             }
           ];
-          get_element_icon.__raw = ''
+          get_element_icon = lib.nixvim.mkRaw ''
             function(opts)
               local mini_icons_get
               do

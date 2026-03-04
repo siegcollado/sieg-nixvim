@@ -1,9 +1,9 @@
-{ lib, ... }:
+{ lib, config, ... }:
 {
   plugins.which-key = {
     enable = true;
     settings = {
-      preset = "helix";
+      preset = "modern";
       icons = {
         mappings = false;
       };
@@ -15,6 +15,10 @@
         {
           __unkeyed-1 = "<leader>a";
           group = "+ai";
+          mode = [
+            "n"
+            "x"
+          ];
         }
         {
           __unkeyed-1 = "<leader>b";
@@ -39,10 +43,14 @@
         {
           __unkeyed-1 = "<leader>g";
           group = "+git";
+          mode = [
+            "n"
+            "x"
+          ];
         }
         {
-          __unkeyed-1 = "<leader>o";
-          group = "+overseer";
+          __unkeyed-1 = "<leader>p";
+          group = "+project";
         }
         {
           __unkeyed-1 = "<leader>q";
@@ -55,6 +63,10 @@
         {
           __unkeyed-1 = "<leader>s";
           group = "+search";
+          mode = [
+            "n"
+            "x"
+          ];
         }
         {
           __unkeyed-1 = "<leader>t";
@@ -77,6 +89,21 @@
           group = "+tabs";
         }
       ];
+    };
+  };
+
+  # Add WhichKey highlight groups to transparent plugin
+  plugins.transparent = lib.mkIf config.transparent {
+    settings.extra_groups = [
+      "WhichKeySeparator"
+      "WhichKeyIcon"
+    ];
+  };
+
+  # WhichKey border colors from theme
+  highlightOverride = {
+    WhichKeyBorder = {
+      fg = config.plugins.mini.modules.base16.palette.base01;
     };
   };
 

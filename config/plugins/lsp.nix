@@ -3,10 +3,35 @@
   plugins.lsp = {
     enable = true;
 
+    # Enable inlay hints globally (LazyVim style)
+    inlayHints = true;
+
+    # Global capabilities for all servers (LazyVim style)
+    # Note: modifies the provided capabilities table in place
+    capabilities = ''
+      capabilities.workspace = capabilities.workspace or {}
+      capabilities.workspace.fileOperations = {
+        didRename = true,
+        willRename = true,
+      }
+    '';
+
     servers = {
       # Lua with extensive custom settings
       lua_ls = {
         enable = true;
+        # Ensure lua_ls attaches to standalone files and projects
+        rootMarkers = [
+          ".git"
+          ".luarc.json"
+          ".luarc.jsonc"
+          ".editorconfig"
+
+          # for exrc.nvim
+          ".nvim.lua"
+          ".nvimrc.lua"
+          ".exrc.lua"
+        ];
         settings = {
           Lua = {
             codeLens = {
@@ -81,6 +106,17 @@
             end
           '';
           options.desc = "Lsp Info";
+        }
+        {
+          key = "<leader>cR";
+          action = lib.nixvim.mkRaw ''
+            function()
+              require("utils.features").safe_require("snacks", function(snacks)
+                snacks.rename.rename_file()
+              end)
+            end
+          '';
+          options.desc = "Rename File";
         }
         {
           key = "<leader>cA";
