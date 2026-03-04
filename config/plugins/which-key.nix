@@ -1,0 +1,97 @@
+{ lib, ... }:
+{
+  plugins.which-key = {
+    enable = true;
+    settings = {
+      preset = "helix";
+      icons = {
+        mappings = false;
+      };
+      spec = [
+        {
+          __unkeyed-1 = "<leader>?";
+          desc = "Buffer Keymaps (which-key)";
+        }
+        {
+          __unkeyed-1 = "<leader>a";
+          group = "+ai";
+        }
+        {
+          __unkeyed-1 = "<leader>b";
+          group = "+buffer";
+        }
+        {
+          __unkeyed-1 = "<leader>c";
+          group = "+code";
+          mode = [
+            "n"
+            "x"
+          ];
+        }
+        {
+          __unkeyed-1 = "<leader>d";
+          group = "+debug";
+        }
+        {
+          __unkeyed-1 = "<leader>f";
+          group = "+file/find";
+        }
+        {
+          __unkeyed-1 = "<leader>g";
+          group = "+git";
+        }
+        {
+          __unkeyed-1 = "<leader>o";
+          group = "+overseer";
+        }
+        {
+          __unkeyed-1 = "<leader>q";
+          group = "+quit/session";
+        }
+        {
+          __unkeyed-1 = "<leader>r";
+          group = "+refactor";
+        }
+        {
+          __unkeyed-1 = "<leader>s";
+          group = "+search";
+        }
+        {
+          __unkeyed-1 = "<leader>t";
+          group = "+test";
+        }
+        {
+          __unkeyed-1 = "<leader>u";
+          group = "+ui";
+        }
+        {
+          __unkeyed-1 = "<leader>w";
+          group = "+windows";
+        }
+        {
+          __unkeyed-1 = "<leader>x";
+          group = "+diagnostics/quickfix";
+        }
+        {
+          __unkeyed-1 = "<leader><tab>";
+          group = "+tabs";
+        }
+      ];
+    };
+  };
+
+  keymaps = [
+    {
+      mode = "n";
+      key = "<leader>?";
+      action = lib.nixvim.mkRaw ''
+        function()
+          require("which-key").show({ global = false })
+        end
+      '';
+      options = {
+        desc = "Buffer Keymaps (which-key)";
+      };
+    }
+  ];
+}
