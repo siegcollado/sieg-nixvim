@@ -1,6 +1,11 @@
 { lib, config, ... }:
+let
+  inherit (config.sieg-nixvim.theme) transparent;
+in
 {
-  plugins.transparent = lib.mkIf config.sieg-nixvim.theme.transparent {
+  globals.transparent_enabled = transparent;
+
+  plugins.transparent = lib.mkIf transparent {
     enable = true;
     settings = {
       groups = [
