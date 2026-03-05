@@ -29,6 +29,7 @@
     ./snacks.nix
     ./symbols-outline.nix
     ./telescope.nix
+    ./tiny-inline-diagnostic.nix
     ./todo-comments.nix
     ./treesitter.nix
     ./treesj.nix

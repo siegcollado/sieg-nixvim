@@ -11,15 +11,10 @@
         "INFO" = " ";
       };
     };
-    virtual_lines = {
-      current_line = true;
-    };
-    virtual_text = false;
-    # virtual_text = {
-    #   spacing = 4;
-    #   source = "if_many";
-    #   prefix = "● ";
-    #   virt_text_pos = "eol";
+    # FIXME:  minimal setup
+    # virtual_lines = {
+    #   current_line = true;
     # };
+    # virtual_text = false;
   };
 }
