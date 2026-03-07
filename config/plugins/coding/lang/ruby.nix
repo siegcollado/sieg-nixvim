@@ -20,6 +20,8 @@
       };
     };
 
+    lint.lintersByFt.ruby = [ "rubocop" ];
+
     neotest.adapters.rspec = {
       enable = true;
     };
