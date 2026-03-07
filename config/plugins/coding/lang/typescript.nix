@@ -1,16 +1,4 @@
 { lib, ... }:
-let
-  biomeOrPrettier = lib.nixvim.mkRaw ''
-    function(bufnr)
-      local root = require("utils.root")
-      local has_biome_config = root.has_pattern(bufnr, { "biome.json", "biome.jsonc", "biome.yaml", "biome.yml" })
-      if has_biome_config then
-        return { "biome" }
-      end
-      return { "prettier" }
-    end
-  '';
-in
 {
   plugins = {
     neotest.adapters = {
@@ -37,16 +25,23 @@ in
       };
     };
 
-    conform-nvim.settings.formatters_by_ft = {
-      javascript = biomeOrPrettier;
-      javascriptreact = biomeOrPrettier;
-      typescript = biomeOrPrettier;
-      typescriptreact = biomeOrPrettier;
+    conform-nvim.settings.formatters_by_ft =
+      let
+        combined = [
+          "biome"
+          "prettier"
+        ];
+      in
+      {
+        javascript = combined;
+        javascriptreact = combined;
+        typescript = combined;
+        typescriptreact = combined;
 
-      # TODO: move me to json.nix?
-      json = biomeOrPrettier;
-      jsonc = biomeOrPrettier;
-    };
+        # TODO: move me to json.nix?
+        json = combined;
+        jsonc = combined;
+      };
 
     lsp.servers = {
 
