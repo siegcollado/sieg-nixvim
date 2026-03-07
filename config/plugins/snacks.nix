@@ -1,5 +1,7 @@
 { lib, pkgs, ... }:
 {
+  globals.snacks_animate = false; # Keep false - user prefers no animations
+
   plugins.snacks = {
     enable = true;
     autoLoad = true;
@@ -598,6 +600,4 @@
       options.desc = "Undo";
     }
   ];
-
-  # NOTE: Toggle mappings for <leader>u* should live in which-key.nix or dedicated Lua file
 }

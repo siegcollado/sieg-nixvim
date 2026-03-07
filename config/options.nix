@@ -2,9 +2,7 @@
   globals = {
     mapleader = " ";
     maplocalleader = "\\";
-    autoformat = true;
-    snacks_animate = false; # Keep false - user prefers no animations
-    ai_cmp = true; # Use AI source in completion instead of inline suggestions
+    autoformat = true; # used by conform autoformat to toggle
     root_spec = [
       "lsp"
       [
