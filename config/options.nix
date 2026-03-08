@@ -2,7 +2,6 @@
   globals = {
     mapleader = " ";
     maplocalleader = "\\";
-    autoformat = true; # used by conform autoformat to toggle
     root_spec = [
       "lsp"
       [
@@ -12,9 +11,6 @@
       "cwd"
     ];
     root_lsp_ignore = [ "copilot" ];
-    deprecation_warnings = false;
-    trouble_lualine = true;
-    markdown_recommended_style = 0;
   };
 
   opts = {
@@ -71,6 +67,7 @@
     shiftwidth = 2;
     showmode = false;
     showcmd = false;
+    showtabline = 1;
     sidescrolloff = 8;
     signcolumn = "yes";
     smartcase = true;
@@ -97,6 +94,5 @@
     vim.opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus"
     vim.opt.timeoutlen = vim.g.vscode and 1000 or 300
     vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
-    vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
   '';
 }

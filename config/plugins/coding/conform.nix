@@ -13,6 +13,8 @@ let
   '';
 in
 {
+  globals.autoformat = true;
+
   plugins.conform-nvim = {
     enable = true;
 
@@ -28,7 +30,33 @@ in
 
   };
 
+  extraConfigLuaPre = ''
+    vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
+  '';
+
   keymaps = [
+    {
+      mode = "n";
+      key = "<leader>uf";
+      action = lib.nixvim.mkRaw ''
+        function()
+          vim.g.autoformat = not vim.g.autoformat
+          vim.notify("Autoformat: " .. (vim.g.autoformat and "on" or "off"))
+        end
+      '';
+      options.desc = "Toggle Auto Format (Global)";
+    }
+    {
+      mode = "n";
+      key = "<leader>uF";
+      action = lib.nixvim.mkRaw ''
+        function()
+          vim.b.autoformat = not vim.b.autoformat
+          vim.notify("Buffer Autoformat: " .. (vim.b.autoformat and "on" or "off"))
+        end
+      '';
+      options.desc = "Toggle Auto Format (Buffer)";
+    }
     {
       mode = "n";
       key = "<leader>cF";

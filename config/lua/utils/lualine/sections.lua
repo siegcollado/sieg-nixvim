@@ -1,8 +1,8 @@
 local M = {}
 
-local icons = require("utils.icons")
-local progress = require("utils.lualine.progress")
-local status = require("utils.lualine.status")
+local icons = _G.utils.icons
+local progress = _G.utils.lualine.progress
+local status = _G.utils.lualine.status
 
 function M.build()
   local sections = {

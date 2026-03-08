@@ -4,7 +4,7 @@
 ---@field detectors table<string, fun(buf: number, patterns?: string[]): string[]>
 local M = {}
 
-local path = require("utils.path")
+local path = _G.utils.path
 
 M.cache = {}
 M.spec = { "lsp", { ".git", "lua" }, "cwd" }

@@ -7,8 +7,8 @@
   # globals.opts.showtabline = 0;
 
   extraConfigLua = ''
-    local path = require("utils.path")
-    local root = require("utils.root")
+    local path = _G.utils.path
+    local root = _G.utils.root
 
     require("incline").setup({
       hide = {

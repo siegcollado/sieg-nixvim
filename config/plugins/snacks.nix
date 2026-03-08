@@ -1,6 +1,8 @@
 { lib, pkgs, ... }:
 {
-  globals.snacks_animate = false; # Keep false - user prefers no animations
+  # Global switch consumed by snacks.nvim to disable animations.
+  # Keep as a global unless/until we move to an equivalent plugin setting.
+  globals.snacks_animate = false;
 
   plugins.snacks = {
     enable = true;
@@ -80,7 +82,7 @@
   };
 
   # extraConfigLua = ''
-  #   local colors = require('utils.colors')
+  #   local colors = _G.utils.colors
   #
   #   -- picker directory
   #   colors.override_style("SnacksPickerDir", { italic = true });
@@ -261,7 +263,7 @@
       key = "<leader>gl";
       action = lib.nixvim.mkRaw ''
         function()
-          local root = require("utils.root").git()
+          local root = _G.utils.root.git()
           require("snacks").picker.git_log({ cwd = root })
         end
       '';
@@ -303,11 +305,11 @@
       key = "<leader>gg";
       action = lib.nixvim.mkRaw ''
         function()
-          if vim.g.lazygit_enabled == false or vim.fn.executable("lazygit") ~= 1 then
+          if vim.fn.executable("lazygit") ~= 1 then
             vim.notify("lazygit not available", vim.log.levels.WARN)
             return
           end
-          local root = require("utils.root").git()
+          local root = _G.utils.root.git()
           require("snacks").lazygit({ cwd = root })
         end
       '';
@@ -318,7 +320,7 @@
       key = "<leader>gG";
       action = lib.nixvim.mkRaw ''
         function()
-          if vim.g.lazygit_enabled == false or vim.fn.executable("lazygit") ~= 1 then
+          if vim.fn.executable("lazygit") ~= 1 then
             vim.notify("lazygit not available", vim.log.levels.WARN)
             return
           end
@@ -340,7 +342,7 @@
       key = "<leader>ft";
       action = lib.nixvim.mkRaw ''
         function()
-          local root = require("utils.root").get()
+          local root = _G.utils.root.get()
           require("snacks").terminal(nil, { cwd = root })
         end
       '';
@@ -354,7 +356,7 @@
       key = "<c-/>";
       action = lib.nixvim.mkRaw ''
         function()
-          local root = require("utils.root").get()
+          local root = _G.utils.root.get()
           require("snacks").terminal(nil, { cwd = root })
         end
       '';
@@ -368,7 +370,7 @@
       key = "<c-_>";
       action = lib.nixvim.mkRaw ''
         function()
-          local root = require("utils.root").get()
+          local root = _G.utils.root.get()
           require("snacks").terminal(nil, { cwd = root })
         end
       '';

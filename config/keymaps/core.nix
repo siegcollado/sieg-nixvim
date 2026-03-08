@@ -180,5 +180,6 @@
       action = "<C-u>zz";
       options.desc = "Scroll up and center";
     }
+
   ];
 }

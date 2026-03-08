@@ -24,7 +24,7 @@
       ];
       callback = lib.nixvim.mkRaw ''
         function(args)
-          require("utils.root").clear_cache(args.buf)
+          _G.utils.root.clear_cache(args.buf)
         end
       '';
       desc = "Clear root cache";

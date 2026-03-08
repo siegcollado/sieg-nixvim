@@ -20,13 +20,12 @@
 
     # This just merges in the options without erasing the original settings
     extraConfigLua = ''
-      local colors = require('utils.colors')
+      local colors = _G.utils.colors
 
       colors.override_style("Comment", { italic = true });
       colors.override_style("Function", { italic = true });
       colors.override_style("Keyword", { bold = true });
     '';
 
-    globals.colors_name = "base16";
   };
 }

@@ -1,30 +1,6 @@
 { lib, ... }:
 {
   keymaps = [
-    # Format toggles
-    {
-      mode = "n";
-      key = "<leader>uf";
-      action = lib.nixvim.mkRaw ''
-        function()
-          vim.g.autoformat = not vim.g.autoformat
-          vim.notify("Autoformat: " .. (vim.g.autoformat and "on" or "off"))
-        end
-      '';
-      options.desc = "Toggle Auto Format (Global)";
-    }
-    {
-      mode = "n";
-      key = "<leader>uF";
-      action = lib.nixvim.mkRaw ''
-        function()
-          vim.b.autoformat = not vim.b.autoformat
-          vim.notify("Buffer Autoformat: " .. (vim.b.autoformat and "on" or "off"))
-        end
-      '';
-      options.desc = "Toggle Auto Format (Buffer)";
-    }
-
     # Location list
     {
       mode = "n";

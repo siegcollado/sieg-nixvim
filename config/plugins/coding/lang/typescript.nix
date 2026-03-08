@@ -10,12 +10,8 @@
           # Or use a function to dynamically find it
           jestConfigFile = lib.nixvim.mkRaw ''
             function()
-              local root = require("utils.root")
-              local configFile = nil
-              vim.schedule(function()
-                configFile = vim.fn.glob(root.cwd() .. "/jest.config.*")
-              end)
-              return configFile
+              local root = _G.utils.root.get()
+              return vim.fn.glob(root .. "/jest.config.*")
             end
           '';
         };
@@ -105,13 +101,13 @@
 
       tailwindcss = {
         enable = true;
-        # rootMarkers = [
-        #   "tailwind.config.js"
-        #   "tailwind.config.cjs"
-        #   "tailwind.config.mjs"
-        #   "tailwind.config.ts"
-        #   "tailwind.config.json"
-        # ];
+        rootMarkers = [
+          "tailwind.config.js"
+          "tailwind.config.cjs"
+          "tailwind.config.mjs"
+          "tailwind.config.ts"
+          "tailwind.config.json"
+        ];
       };
 
       # TODO:  turn this off for biome?
@@ -125,7 +121,7 @@
   # TODO: move this to json.nix as well?
   extraConfigLua = ''
     local lint = require("lint")
-    local root = require("utils.root")
+    local root = _G.utils.root
 
     if lint.linters.biomejs then
       lint.linters.biomejs.cmd = "biome"
@@ -141,7 +137,18 @@
     }
 
     function _G.has_biome_config(bufnr)
-      return root.has_pattern(bufnr, { "biome.json", "biome.jsonc", "biome.yaml", "biome.yml" })
+      local root_dir = root.get({ buf = bufnr })
+      if not root_dir or root_dir == "" then
+        return false
+      end
+      local patterns = { "biome.json", "biome.jsonc", "biome.yaml", "biome.yml" }
+      for _, pattern in ipairs(patterns) do
+        local matches = vim.fn.globpath(root_dir, pattern, true, true)
+        if #matches > 0 then
+          return true
+        end
+      end
+      return false
     end
 
     function _G.should_use_biome(bufnr)

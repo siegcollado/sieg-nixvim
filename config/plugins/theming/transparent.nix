@@ -3,6 +3,9 @@ let
   inherit (config.sieg-nixvim.theme) transparent;
 in
 {
+  # Keep this global in sync with the theme option.
+  # transparent.nvim reads vim.g.transparent_enabled on startup; without this,
+  # transparency can default to off until :TransparentToggle is run manually.
   globals.transparent_enabled = transparent;
 
   plugins.transparent = lib.mkIf transparent {
