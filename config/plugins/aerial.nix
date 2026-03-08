@@ -10,7 +10,7 @@
         "man"
       ];
       layout = {
-        default_direction = "right";
+        default_direction = "left";
         placement = "edge";
         resize_to_content = true;
         win_opts = {

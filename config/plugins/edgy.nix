@@ -39,14 +39,11 @@
       },
       left = {
         {
-          title = "Neo-Tree",
-          ft = "neo-tree",
-          filter = function(buf)
-            return vim.b[buf].neo_tree_source == "filesystem"
-          end,
+          title = "Aerial",
+          ft = "aerial",
           size = { width = 40 },
           pinned = true,
-          open = "Neotree filesystem",
+          open = "AerialOpen",
         },
       },
       right = {
@@ -54,13 +51,6 @@
           title = "Grug Far",
           ft = "grug-far",
           size = { width = 50 },
-        },
-        {
-          title = "Symbols (aerial)",
-          ft = "aerial",
-          size = { width = 40 },
-          pinned = true,
-          open = "AerialOpen",
         },
         {
           title = "Agentic",

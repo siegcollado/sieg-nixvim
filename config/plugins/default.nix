@@ -6,7 +6,6 @@
 
     ./aerial.nix
     ./blink.nix
-    ./bufferline.nix
     ./edgy.nix
     ./exrc.nix
     ./flash.nix
@@ -16,10 +15,10 @@
     ./incline.nix
     ./lualine.nix
     ./mini-ai.nix
+    ./mini-files.nix
     ./mini-icons.nix
     ./mini-pairs.nix
     ./mini-surround.nix
-    ./neo-tree.nix
     ./noice.nix
     ./nui.nix
     ./nvim-tmux-navigation.nix
@@ -27,7 +26,6 @@
     ./overseer.nix
     ./persistence.nix
     ./snacks.nix
-    ./symbols-outline.nix
     ./telescope.nix
     ./tiny-inline-diagnostic.nix
     ./todo-comments.nix
