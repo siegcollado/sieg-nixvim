@@ -31,11 +31,6 @@
           ft = "trouble",
           size = { height = 0.4 },
         },
-        {
-          title = "Overseer",
-          ft = "OverseerList",
-          size = { height = 0.4 },
-        },
       },
       left = {
         {

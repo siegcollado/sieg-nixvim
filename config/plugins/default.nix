@@ -23,7 +23,6 @@
     ./nui.nix
     ./nvim-tmux-navigation.nix
     ./oil.nix
-    ./overseer.nix
     ./persistence.nix
     ./snacks.nix
     ./telescope.nix
