@@ -186,6 +186,19 @@
     };
   };
 
+  highlightOverride = {
+    MiniFilesTitle = {
+      bg = "NONE";
+      bold = true;
+      italic = true;
+    };
+    MiniFilesTitleFocused = {
+      bg = "NONE";
+      bold = true;
+      italic = true;
+    };
+  };
+
   plugins.transparent = lib.mkIf config.sieg-nixvim.theme.transparent {
     settings.extra_groups = [
       "MiniFilesNormal"
