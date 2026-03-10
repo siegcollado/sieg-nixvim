@@ -77,42 +77,6 @@
     splitkeep = "screen";
   };
 
-  # Keymaps for toggling specific right panels
-  keymaps = [
-    {
-      mode = "n";
-      key = "<leader>eg";
-      action = "<cmd>GrugFar<CR>";
-      options.desc = "Toggle Grug Far";
-    }
-    {
-      mode = "n";
-      key = "<leader>ea";
-      action = "<cmd>AerialToggle<CR>";
-      options.desc = "Toggle Aerial";
-    }
-    {
-      mode = "n";
-      key = "<leader>ev";
-      action = "<cmd>AvanteToggle<CR>";
-      options.desc = "Toggle Avante";
-    }
-    {
-      mode = "n";
-      key = "<leader>ec";
-      action = "<cmd>edgy.close('right')<CR>";
-      options.desc = "Close Right Panel";
-    }
-  ];
-
-  # Add which-key group
-  plugins.which-key.settings.spec = lib.mkAfter [
-    {
-      __unkeyed-1 = "<leader>e";
-      group = "+edgy";
-    }
-  ];
-
   # Add edgy highlight groups to transparent plugin
   plugins.transparent = lib.mkIf config.sieg-nixvim.theme.transparent {
     settings.extra_groups = [
