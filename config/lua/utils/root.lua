@@ -213,4 +213,46 @@ function M.clear_cache(buf)
   end
 end
 
+---@param file string
+---@param parts_length? number
+---@return string
+function M.pretty_print_path(file, parts_length)
+  local length = parts_length or 3
+
+  if file == "" then
+    return ""
+  end
+
+  local normalized_path = path.norm(file)
+  local cwd = M.cwd()
+
+  local norm_path = normalized_path
+  if norm_path:find(cwd, 1, true) == 1 then
+    normalized_path = normalized_path:sub(#cwd + 2)
+  end
+
+  local sep = package.config:sub(1, 1)
+  local parts = vim.split(normalized_path, "[\\/]")
+
+  if length == 0 then
+    parts = parts
+  elseif #parts > length then
+    parts = { parts[1], "…", unpack(parts, #parts - length + 2, #parts) }
+  end
+
+  if length == 0 then
+    parts = parts
+  elseif #parts > length then
+    parts = { parts[1], "…", unpack(parts, #parts - length + 2, #parts) }
+  end
+
+  local dir = ""
+  if #parts > 1 then
+    dir = table.concat({ unpack(parts, 1, #parts - 1) }, sep)
+    dir = dir .. sep
+  end
+
+  return dir .. parts[#parts] .. sep
+end
+
 return M
