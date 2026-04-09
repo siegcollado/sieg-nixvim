@@ -6,5 +6,13 @@
     "markdown.mdx" = [ "prettier" ];
   };
 
-  plugins.lsp.servers.marksman.enable = true;
+  plugins.lsp.servers.marksman = {
+    enable = true;
+    # TODO: remove when nixpkgs#506470 lands in nixpkgs-unstable.
+    # Ideally I'd like to temporarily overlay marksman from a nixpkgs
+    # revision containing the ICU symbol fix (instead of this env var).
+    # We are keeping this env workaround for now because pulling/building the
+    # .NET-based marksman overlay is slower in this setup.
+    extraOptions.cmd_env.DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "1";
+  };
 }

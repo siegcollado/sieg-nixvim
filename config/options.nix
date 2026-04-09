@@ -93,6 +93,6 @@
   extraConfigLuaPre = ''
     vim.opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus"
     vim.opt.timeoutlen = vim.g.vscode and 1000 or 300
-    vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
+    -- vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
   '';
 }
