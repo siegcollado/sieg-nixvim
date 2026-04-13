@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   keymaps = [
     # Move lines
@@ -42,13 +43,36 @@
     {
       mode = "n";
       key = "<leader>fy";
-      action = ":let @+=expand('%:p')<cr>";
+      action = lib.nixvim.mkRaw ''
+        function()
+          local file = vim.api.nvim_buf_get_name(0)
+          if file == "" then
+            return
+          end
+
+          local root = _G.utils.root.get({ buf = 0, normalize = true })
+          local rel = vim.fs.relpath(root, vim.fs.normalize(file)) or vim.fn.fnamemodify(file, ":.")
+          vim.fn.setreg("+", rel)
+        end
+      '';
       options.desc = "Copy File Path";
     }
     {
       mode = "n";
       key = "<leader>fY";
-      action = ":let @+=expand(\"%:p\") . \":\" . line(\".\")<cr>";
+      action = lib.nixvim.mkRaw ''
+        function()
+          local file = vim.api.nvim_buf_get_name(0)
+          if file == "" then
+            return
+          end
+
+          local root = _G.utils.root.get({ buf = 0, normalize = true })
+          local rel = vim.fs.relpath(root, vim.fs.normalize(file)) or vim.fn.fnamemodify(file, ":.")
+          local line = vim.api.nvim_win_get_cursor(0)[1]
+          vim.fn.setreg("+", rel .. ":" .. line)
+        end
+      '';
       options.desc = "Copy File Path + Line";
     }
 
