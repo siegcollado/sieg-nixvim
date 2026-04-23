@@ -39,13 +39,16 @@
       action = lib.nixvim.mkRaw ''
         function()
           local MiniFiles = require("mini.files")
-          if not MiniFiles.close() then
-            MiniFiles.open(_G.utils.root.get(), true)
+          if MiniFiles.close() then
+            return
           end
+
+          MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+          MiniFiles.reveal_cwd()
         end
       '';
       options = {
-        desc = "Explorer MiniFiles (Root Dir)";
+        desc = "Explorer MiniFiles (Current File -> cwd)";
       };
     }
     {
@@ -55,21 +58,6 @@
         function()
           local MiniFiles = require("mini.files")
           if not MiniFiles.close() then
-            MiniFiles.open(vim.uv.cwd(), true)
-          end
-        end
-      '';
-      options = {
-        desc = "Explorer MiniFiles (cwd)";
-      };
-    }
-    {
-      mode = "n";
-      key = "<leader>e";
-      action = lib.nixvim.mkRaw ''
-        function()
-          local MiniFiles = require("mini.files")
-          if not MiniFiles.close() then
             MiniFiles.open(_G.utils.root.get(), true)
           end
         end
@@ -80,17 +68,35 @@
     }
     {
       mode = "n";
+      key = "<leader>e";
+      action = lib.nixvim.mkRaw ''
+        function()
+          local MiniFiles = require("mini.files")
+          if MiniFiles.close() then
+            return
+          end
+
+          MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+          MiniFiles.reveal_cwd()
+        end
+      '';
+      options = {
+        desc = "Explorer MiniFiles (Current File -> cwd)";
+      };
+    }
+    {
+      mode = "n";
       key = "<leader>E";
       action = lib.nixvim.mkRaw ''
         function()
           local MiniFiles = require("mini.files")
           if not MiniFiles.close() then
-            MiniFiles.open(vim.uv.cwd(), true)
+            MiniFiles.open(_G.utils.root.get(), true)
           end
         end
       '';
       options = {
-        desc = "Explorer MiniFiles (cwd)";
+        desc = "Explorer MiniFiles (Root Dir)";
       };
     }
   ];
