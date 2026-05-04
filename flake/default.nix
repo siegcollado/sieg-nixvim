@@ -7,16 +7,26 @@
   ...
 }:
 let
+  mkPkgs =
+    system:
+    import inputs.nixpkgs {
+      inherit system;
+      overlays = [ self.overlays.default ];
+      config.allowUnfreePredicate =
+        pkg:
+        builtins.elem (lib.getName pkg) [
+          "neotest-vitest"
+          "transparent.nvim"
+        ];
+    };
+
   mkNixvimConfig =
     {
       system,
       modules ? [ ],
     }:
     let
-      pkgs = import inputs.nixpkgs {
-        inherit system;
-        overlays = [ self.overlays.default ];
-      };
+      pkgs = mkPkgs system;
     in
     inputs.nixvim.lib.evalNixvim {
       inherit system;
@@ -46,12 +56,7 @@ in
     { system, ... }:
     let
       # Create pkgs with our custom overlay
-      pkgs = import inputs.nixpkgs {
-        inherit system;
-        overlays = [
-          self.overlays.default
-        ];
-      };
+      pkgs = mkPkgs system;
 
       nixvimLib = inputs.nixvim.lib.${system};
       nixvim' = inputs.nixvim.legacyPackages.${system};
