@@ -56,6 +56,17 @@
       [vim.diagnostic.severity.HINT] = colors.get_fg("DiagnosticHint") or colors.get_fg("DiagnosticSignHint") or title_fg,
     }
 
+    local function is_subpath(child, parent)
+      if not child or child == "" or not parent or parent == "" then
+        return false
+      end
+
+      child = path.norm(child)
+      parent = path.norm(parent)
+
+      return child == parent or child:sub(1, #parent + 1) == parent .. "/"
+    end
+
     local function diagnostics_chunks(buf)
       local counts = {
         [vim.diagnostic.severity.ERROR] = 0,
@@ -159,12 +170,18 @@
         local buffer_name = vim.api.nvim_buf_get_name(props.buf)
         local file_path = vim.fn.fnamemodify(buffer_name, ":.:h")
         local filename = vim.fn.fnamemodify(buffer_name, ":t")
-        local is_active_win = props.win == vim.api.nvim_get_current_win()
-        local diagnostics = is_active_win and diagnostics_chunks(props.buf) or nil
 
         if filename == "" then
           return {}
         end
+
+        local project_root = root.get({ buf = props.buf, normalize = true })
+        if not is_subpath(buffer_name, project_root) then
+          return {}
+        end
+
+        local is_active_win = props.win == vim.api.nvim_get_current_win()
+        local diagnostics = is_active_win and diagnostics_chunks(props.buf) or nil
 
         local chunks = {}
 
