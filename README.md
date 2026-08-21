@@ -93,6 +93,14 @@ sieg-nixvim.theme.palette = config.lib.stylix.colors.withHashtag;
 sieg-nixvim.theme.transparent = config.stylix.opacity.terminal < 1.0;
 ```
 
+### Copilot token storage
+
+Copilot encrypts its cached authentication token with the system keyring by default. For headless environments without a usable keyring, disable this explicitly:
+
+```nix
+sieg-nixvim.copilot.tokenEncryption = false;
+```
+
 If you build your config with `evalNixvim`, pass the overrides directly:
 
 ```nix
