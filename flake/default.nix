@@ -15,6 +15,7 @@ let
       config.allowUnfreePredicate =
         pkg:
         builtins.elem (lib.getName pkg) [
+          "copilot-language-server"
           "neotest-vitest"
           "transparent.nvim"
         ];
