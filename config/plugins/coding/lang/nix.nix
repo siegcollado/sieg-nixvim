@@ -6,10 +6,10 @@
     ];
 
     lint.lintersByFt.nix = [ "statix" ];
+  };
 
-    lsp.servers = {
-      nil_ls.enable = true; # Nix
-      statix.enable = true; # Nix linter
-    };
+  lsp.servers = {
+    nil_ls.enable = true; # Nix
+    statix.enable = true; # Nix linter
   };
 }

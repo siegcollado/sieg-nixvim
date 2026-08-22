@@ -1,4 +1,12 @@
 {
+  # No :ruby/:rubydo vimscript usage - avoids wiring in neovim-ruby-env, whose
+  # GEM_HOME (a nix store path) otherwise leaks into every child process,
+  # including ruby-lsp's own bundle install step.
+  withRuby = false;
+
+  # No :python3/:pyfile vimscript usage either - drops pynvim from the closure.
+  withPython3 = false;
+
   globals = {
     mapleader = " ";
     maplocalleader = "\\";

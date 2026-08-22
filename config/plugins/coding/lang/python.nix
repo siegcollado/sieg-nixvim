@@ -3,7 +3,6 @@
   plugins = {
     conform-nvim.settings.formatters_by_ft.python = [ "black" ];
 
-    lsp.servers.pyright.enable = true;
     neotest.adapters.python = {
       enable = true;
       settings = {
@@ -15,4 +14,6 @@
       };
     };
   };
+
+  lsp.servers.pyright.enable = true;
 }

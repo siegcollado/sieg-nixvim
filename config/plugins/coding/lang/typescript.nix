@@ -38,14 +38,16 @@
         json = combined;
         jsonc = combined;
       };
+  };
 
-    lsp.servers = {
+  lsp.servers = {
 
-      # NOTE: apparently this is slow on large projects, using vtsls instead
-      # plugins.lsp.servers.ts_ls.enable = true;
+    # NOTE: apparently this is slow on large projects, using vtsls instead
+    # lsp.servers.ts_ls.enable = true;
 
-      vtsls = {
-        enable = true;
+    vtsls = {
+      enable = true;
+      config = {
         filetypes = [
           "javascript"
           "javascriptreact"
@@ -98,23 +100,23 @@
           };
         };
       };
+    };
 
-      tailwindcss = {
-        enable = true;
-        rootMarkers = [
-          "tailwind.config.js"
-          "tailwind.config.cjs"
-          "tailwind.config.mjs"
-          "tailwind.config.ts"
-          "tailwind.config.json"
-        ];
-      };
+    tailwindcss = {
+      enable = true;
+      config.root_markers = [
+        "tailwind.config.js"
+        "tailwind.config.cjs"
+        "tailwind.config.mjs"
+        "tailwind.config.ts"
+        "tailwind.config.json"
+      ];
+    };
 
-      # TODO:  turn this off for biome?
-      eslint = {
-        enable = true;
-        settings.workingDirectories.mode = "auto";
-      };
+    # TODO:  turn this off for biome?
+    eslint = {
+      enable = true;
+      config.settings.workingDirectories.mode = "auto";
     };
   };
 

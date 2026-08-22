@@ -1,3 +1,3 @@
 {
-  plugins.lsp.servers.jsonls.enable = true;
+  lsp.servers.jsonls.enable = true;
 }
