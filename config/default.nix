@@ -1,3 +1,7 @@
+{ lib, ... }:
+let
+  icons = import ./icons.nix;
+in
 {
   imports = [
     ./options.nix
@@ -10,7 +14,10 @@
 
   extraFiles = {
     "lua/utils/colors.lua".source = ./lua/utils/colors.lua;
-    "lua/utils/icons.lua".source = ./lua/utils/icons.lua;
+    "lua/utils/icons.lua".text = ''
+      local icons = ${lib.nixvim.toLuaObject icons}
+      return icons
+    '';
     "lua/utils/root.lua".source = ./lua/utils/root.lua;
     "lua/utils/path.lua".source = ./lua/utils/path.lua;
     "lua/utils/lualine/progress.lua".source = ./lua/utils/lualine/progress.lua;
