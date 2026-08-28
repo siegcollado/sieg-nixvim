@@ -26,8 +26,6 @@
       },
       -- Automatically trust when saving exrc file
       trust_on_write = true,
-      -- Use telescope instead of vim.ui.select for picking files (if available)
-      use_telescope = true,
       -- LSP configuration
       lsp = {
         -- Automatically configure lspconfig to register on_new_config

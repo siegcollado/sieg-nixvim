@@ -25,7 +25,6 @@
     ./oil.nix
     ./persistence.nix
     ./snacks.nix
-    ./telescope.nix
     ./tiny-inline-diagnostic.nix
     ./todo-comments.nix
     ./treesitter.nix
