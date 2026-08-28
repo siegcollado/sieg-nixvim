@@ -11,9 +11,8 @@
         pname = "agentic.nvim";
         version = inputs.agentic-nvim.shortRev or "unknown";
         src = inputs.agentic-nvim;
-        # Disable all checks - plugin has test files with missing deps
+        # Disable checks - plugin has test files with missing deps
         doCheck = false;
-        dontCheck = true;
       };
     };
   };

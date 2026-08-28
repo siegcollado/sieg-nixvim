@@ -33,10 +33,6 @@
           ];
         }
         {
-          __unkeyed-1 = "<leader>d";
-          group = "+debug";
-        }
-        {
           __unkeyed-1 = "<leader>f";
           group = "+file/find";
         }
@@ -49,16 +45,8 @@
           ];
         }
         {
-          __unkeyed-1 = "<leader>p";
-          group = "+project";
-        }
-        {
           __unkeyed-1 = "<leader>q";
           group = "+quit/session";
-        }
-        {
-          __unkeyed-1 = "<leader>r";
-          group = "+refactor";
         }
         {
           __unkeyed-1 = "<leader>s";
@@ -83,10 +71,6 @@
         {
           __unkeyed-1 = "<leader>x";
           group = "+diagnostics/quickfix";
-        }
-        {
-          __unkeyed-1 = "<leader><tab>";
-          group = "+tabs";
         }
       ];
     };

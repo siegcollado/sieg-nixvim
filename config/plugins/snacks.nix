@@ -81,13 +81,6 @@
     };
   };
 
-  # extraConfigLua = ''
-  #   local colors = _G.utils.colors
-  #
-  #   -- picker directory
-  #   colors.override_style("SnacksPickerDir", { italic = true });
-  # '';
-
   keymaps = [
     # Buffer management
     {

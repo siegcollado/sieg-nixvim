@@ -10,7 +10,6 @@
   extraConfigLuaPre = ''
     -- Leader key setup
     vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
-    vim.g.mapleader = " "
 
     -- Diagnostic navigation helper (global for keymap access)
     _G.diagnostic_goto = function(next, severity)

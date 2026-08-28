@@ -16,10 +16,6 @@ local icons = {
     conflict = "",
     ignored = "◌",
   },
-  ui = {
-    ArrowClosed = "",
-    ArrowOpen = "",
-  },
 }
 
 return icons

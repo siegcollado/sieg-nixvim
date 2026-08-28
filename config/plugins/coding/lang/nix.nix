@@ -1,9 +1,6 @@
 {
   plugins = {
-    conform-nvim.settings.formatters_by_ft.nix = [
-      "nixfmt"
-      # "statix"
-    ];
+    conform-nvim.settings.formatters_by_ft.nix = [ "nixfmt" ];
 
     lint.lintersByFt.nix = [ "statix" ];
   };

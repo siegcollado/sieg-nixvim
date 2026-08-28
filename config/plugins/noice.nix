@@ -29,28 +29,6 @@
           command_palette = true;
           long_message_to_split = true;
         };
-        # cmdline = {
-        #   enabled = true;
-        #   format = {
-        #     cmdline = {
-        #       icon = " ";
-        # hl_group = "DiagnosticInfo";
-        # firstc = false;
-        # };
-        # search_down = {
-        #   icon = " ";
-        #   hl_group = "DiagnosticWarn";
-        # };
-        # search_up = {
-        #   icon = " ";
-        #   hl_group = "DiagnosticWarn";
-        # };
-        # help = {
-        #   icon = "? ";
-        #   hl_group = "DiagnosticQuestion";
-        # };
-        #   };
-        # };
       };
     };
     nui.enable = true;
@@ -70,16 +48,6 @@
         "NoiceLspProgressSpinner"
       ];
     };
-  };
-
-  # Noice border colors from theme
-  highlightOverride = {
-    # NoicePopupBorder = {
-    #   fg = config.colorschemes.mini-base16.settings.palette.base01;
-    # };
-    # NoiceCmdlinePopupBorder = {
-    #   fg = config.colorschemes.mini-base16.settings.palette.base01;
-    # };
   };
 
   keymaps = [

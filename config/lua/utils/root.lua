@@ -240,12 +240,6 @@ function M.pretty_print_path(file, parts_length)
     parts = { parts[1], "…", unpack(parts, #parts - length + 2, #parts) }
   end
 
-  if length == 0 then
-    parts = parts
-  elseif #parts > length then
-    parts = { parts[1], "…", unpack(parts, #parts - length + 2, #parts) }
-  end
-
   local dir = ""
   if #parts > 1 then
     dir = table.concat({ unpack(parts, 1, #parts - 1) }, sep)
