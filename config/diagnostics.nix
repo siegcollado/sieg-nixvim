@@ -12,10 +12,5 @@
         "INFO" = "i ";
       };
     };
-    # FIXME:  minimal setup
-    # virtual_lines = {
-    #   current_line = true;
-    # };
-    # virtual_text = false;
   };
 }

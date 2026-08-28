@@ -3,6 +3,10 @@ let
   inherit (config.sieg-nixvim.theme) transparent;
 in
 {
+  # tiny-inline-diagnostic renders its own inline text; disable the core
+  # renderer to avoid duplicate/overlapping diagnostic text.
+  diagnostic.settings.virtual_text = false;
+
   plugins.tiny-inline-diagnostic = {
     enable = true;
     settings = {
