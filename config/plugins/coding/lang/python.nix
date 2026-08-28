@@ -8,7 +8,7 @@
       settings = {
         is_test_file = lib.nixvim.mkRaw ''
           function(filename)
-            return string.match(file_path, "test_.*%.py") ~= nil
+            return string.match(filename, "test_.*%.py") ~= nil
           end
         '';
       };

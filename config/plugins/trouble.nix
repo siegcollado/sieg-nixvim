@@ -31,7 +31,7 @@
     }
     {
       mode = "n";
-      key = "<leader>cs";
+      key = "<leader>xs";
       action = lib.nixvim.mkRaw ''function() require("trouble").toggle("lsp_document_symbols") end'';
       options.desc = "Symbols (Trouble)";
     }

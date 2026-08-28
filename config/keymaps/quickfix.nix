@@ -30,19 +30,6 @@
       '';
       options.desc = "Quickfix List";
     }
-    {
-      mode = "n";
-      key = "[q";
-      action = lib.nixvim.mkRaw "vim.cmd.cprev";
-      options.desc = "Previous Quickfix";
-    }
-    {
-      mode = "n";
-      key = "]q";
-      action = lib.nixvim.mkRaw "vim.cmd.cnext";
-      options.desc = "Next Quickfix";
-    }
-
     # Diagnostics (using diagnostic_goto helper from default.nix)
     {
       mode = "n";
