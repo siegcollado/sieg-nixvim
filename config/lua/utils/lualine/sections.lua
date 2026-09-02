@@ -95,10 +95,14 @@ function M.build()
     function(msg)
       local lsps = status.lsp(msg)
       local formatters = status.conform()
-      if lsps == "" or formatters == "" then
-        return ""
+      local parts = {}
+      if lsps ~= "" then
+        table.insert(parts, " " .. lsps)
       end
-      return table.concat({ lsps, formatters }, ",")
+      if formatters ~= "" then
+        table.insert(parts, " " .. formatters)
+      end
+      return table.concat(parts, " ")
     end,
     color = { gui = "bold" },
     padding = { left = 0, right = 1 },
