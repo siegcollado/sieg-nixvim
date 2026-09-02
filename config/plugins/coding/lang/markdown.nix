@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   globals.markdown_recommended_style = 0;
 
@@ -6,13 +7,23 @@
     "markdown.mdx" = [ "prettier" ];
   };
 
-  lsp.servers.marksman = {
-    enable = true;
-    # TODO: remove when nixpkgs#506470 lands in nixpkgs-unstable.
-    # Ideally I'd like to temporarily overlay marksman from a nixpkgs
-    # revision containing the ICU symbol fix (instead of this env var).
-    # We are keeping this env workaround for now because pulling/building the
-    # .NET-based marksman overlay is slower in this setup.
-    config.cmd_env.DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "1";
-  };
+  lsp.servers.marksman.enable = true;
+
+  keymaps = [
+    {
+      mode = "n";
+      key = "<leader>uc";
+      action = lib.nixvim.mkRaw ''
+        function()
+          if vim.wo.conceallevel > 0 then
+            vim.w.old_conceallevel = vim.wo.conceallevel
+            vim.wo.conceallevel = 0
+          else
+            vim.wo.conceallevel = vim.w.old_conceallevel or 2
+          end
+        end
+      '';
+      options.desc = "Toggle Conceal";
+    }
+  ];
 }
