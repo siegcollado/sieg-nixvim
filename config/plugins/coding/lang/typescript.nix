@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   plugins = {
     neotest.adapters = {
@@ -64,60 +64,75 @@
     # NOTE: apparently this is slow on large projects, using vtsls instead
     # lsp.servers.ts_ls.enable = true;
 
-    vtsls = {
-      enable = true;
-      config = {
-        filetypes = [
-          "javascript"
-          "javascriptreact"
-          "javascript.jsx"
-          "typescript"
-          "typescriptreact"
-          "typescript.tsx"
-        ];
-        settings = {
-          complete_function_calls = true;
+    # NOTE: testing tsgo (native Go port, targets TS 6.0 parity) as a
+    # replacement. Commented out rather than removed until the comparison
+    # is done.
+    /*
+      vtsls = {
+        enable = true;
+        config = {
+          filetypes = [
+            "javascript"
+            "javascriptreact"
+            "javascript.jsx"
+            "typescript"
+            "typescriptreact"
+            "typescript.tsx"
+          ];
+          settings = {
+            complete_function_calls = true;
 
-          vtsls = {
-            enableMoveToFileCodeAction = true;
-            autoUseWorkspaceTsdk = true;
-            experimental = {
-              maxInlayHintLength = 30;
-              completion = {
-                enableServerSideFuzzMatch = true;
+            vtsls = {
+              enableMoveToFileCodeAction = true;
+              autoUseWorkspaceTsdk = true;
+              experimental = {
+                maxInlayHintLength = 30;
+                completion = {
+                  enableServerSideFuzzMatch = true;
+                };
               };
             };
-          };
 
-          typescript = {
-            updateImportsOnFileMove = {
-              enabled = "always";
-            };
-            suggest = {
-              completeFunctionCalls = true;
-            };
-            inlayHints = {
-              enumMemberValues = {
-                enabled = true;
+            typescript = {
+              updateImportsOnFileMove = {
+                enabled = "always";
               };
-              functionLikeReturnTypes = {
-                enabled = true;
+              suggest = {
+                completeFunctionCalls = true;
               };
-              parameterNames = {
-                enabled = "literals";
-              };
-              parameterTypes = {
-                enabled = true;
-              };
-              propertyDeclarationTypes = {
-                enabled = true;
-              };
-              variableTypes = {
-                enabled = false;
+              inlayHints = {
+                enumMemberValues = {
+                  enabled = true;
+                };
+                functionLikeReturnTypes = {
+                  enabled = true;
+                };
+                parameterNames = {
+                  enabled = "literals";
+                };
+                parameterTypes = {
+                  enabled = true;
+                };
+                propertyDeclarationTypes = {
+                  enabled = true;
+                };
+                variableTypes = {
+                  enabled = false;
+                };
               };
             };
           };
         };
+      };
+    */
+
+    tsgo = {
+      enable = true;
+      package = pkgs.typescript-go;
+      config.settings.typescript = {
+        # updateImportsOnFileMove.enabled = "always";
+        suggest.completeFunctionCalls = true;
+        inlayHints.variableTypes.enabled = false;
       };
     };
 
