@@ -18,7 +18,7 @@ in
   plugins.conform-nvim = {
     enable = true;
 
-    autoInstall.enable = true;
+    autoInstall.enable = false;
 
     settings = {
       default_format_opts = {

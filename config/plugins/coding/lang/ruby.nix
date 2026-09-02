@@ -2,8 +2,6 @@
   plugins = {
     conform-nvim.settings.formatters_by_ft.ruby = [ "rubocop" ];
 
-    lint.lintersByFt.ruby = [ "rubocop" ];
-
     neotest.adapters.rspec = {
       enable = true;
     };

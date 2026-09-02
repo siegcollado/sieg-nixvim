@@ -23,10 +23,11 @@
 
     conform-nvim.settings.formatters_by_ft =
       let
-        combined = [
-          "biome"
-          "prettier"
-        ];
+        combined = {
+          __unkeyed-1 = "biome";
+          __unkeyed-2 = "prettier";
+          stop_after_first = true;
+        };
       in
       {
         javascript = combined;
@@ -38,6 +39,24 @@
         json = combined;
         jsonc = combined;
       };
+
+    # conform's built-in biome formatter is only gated on the `biome`
+    # executable existing on PATH, unlike the biome LSP server which
+    # refuses to attach without a biome.json in the project. Without this,
+    # any project with a global `biome` binary reachable on PATH would
+    # silently pick biome over prettier via stop_after_first, even in
+    # projects that never declared biome as a dependency.
+    conform-nvim.settings.formatters.biome.condition = lib.nixvim.mkRaw ''
+      function(self, ctx)
+        local root_file = require("conform.util").root_file({
+          "biome.json",
+          "biome.jsonc",
+          ".biome.json",
+          ".biome.jsonc",
+        })
+        return root_file(self, ctx) ~= nil
+      end
+    '';
   };
 
   lsp.servers = {
@@ -113,79 +132,11 @@
       ];
     };
 
-    # TODO:  turn this off for biome?
     eslint = {
       enable = true;
       config.settings.workingDirectories.mode = "auto";
     };
-  };
 
-  # TODO: move this to json.nix as well?
-  extraConfigLua = ''
-    local lint = require("lint")
-    local root = _G.utils.root
-
-    if lint.linters.biomejs then
-      lint.linters.biomejs.cmd = "biome"
-    end
-
-    _G.biome_filetypes = {
-      javascript = true,
-      javascriptreact = true,
-      typescript = true,
-      typescriptreact = true,
-      json = true,
-      jsonc = true,
-    }
-
-    function _G.has_biome_config(bufnr)
-      local root_dir = root.get({ buf = bufnr })
-      if not root_dir or root_dir == "" then
-        return false
-      end
-      local patterns = { "biome.json", "biome.jsonc", "biome.yaml", "biome.yml" }
-      for _, pattern in ipairs(patterns) do
-        local matches = vim.fn.globpath(root_dir, pattern, true, true)
-        if #matches > 0 then
-          return true
-        end
-      end
-      return false
-    end
-
-    function _G.should_use_biome(bufnr)
-      if not _G.biome_filetypes[vim.bo[bufnr].filetype] then
-        return false
-      end
-      return _G.has_biome_config(bufnr)
-    end
-  '';
-
-  autoCmd = [
-    {
-      event = [
-        "BufReadPost"
-        "BufWritePost"
-        "InsertLeave"
-      ];
-      group = "Linting";
-      callback = lib.nixvim.mkRaw ''
-        function()
-          local lint = require("lint")
-          local bufnr = vim.api.nvim_get_current_buf()
-          if _G.should_use_biome(bufnr) then
-            lint.try_lint({ "biomejs" })
-            return
-          end
-          lint.try_lint()
-        end
-      '';
-    }
-  ];
-
-  autoGroups = {
-    Linting = {
-      clear = true;
-    };
+    biome.enable = true;
   };
 }
