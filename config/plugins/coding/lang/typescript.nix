@@ -128,7 +128,7 @@
 
     tsgo = {
       enable = true;
-      package = pkgs.typescript-go;
+      package = pkgs.typescript;
       config.settings.typescript = {
         # updateImportsOnFileMove.enabled = "always";
         suggest.completeFunctionCalls = true;
