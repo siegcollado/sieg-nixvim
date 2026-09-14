@@ -129,10 +129,20 @@
     tsgo = {
       enable = true;
       package = pkgs.typescript;
-      config.settings.typescript = {
-        # updateImportsOnFileMove.enabled = "always";
-        suggest.completeFunctionCalls = true;
-        inlayHints.variableTypes.enabled = false;
+      config = {
+        # nixpkgs' typescript_7 build installs the native tsgo binary as `tsc`
+        # (bin/tsgo was dropped, see NixOS/nixpkgs#560917), so the upstream
+        # `cmd = 'tsgo'` lookup never resolves. Point cmd at `tsc` directly.
+        cmd = [
+          (lib.getExe pkgs.typescript)
+          "--lsp"
+          "--stdio"
+        ];
+        settings.typescript = {
+          # updateImportsOnFileMove.enabled = "always";
+          suggest.completeFunctionCalls = true;
+          inlayHints.variableTypes.enabled = false;
+        };
       };
     };
 
