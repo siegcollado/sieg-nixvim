@@ -1,28 +1,24 @@
 # Project specific neovim overrides
 
-## Project specific settings via [exrc.nvim](https://github.com/jedrzejboczar/exrc.nvim)
+Neovim loads a `.nvim.lua` file from the project directory (`opts.exrc = true`).
+Neovim asks you to trust the file the first time, and again after each edit.
+Run `:trust` to approve it.
 
-From readme:
+Get the directory of the `.nvim.lua` file like this:
 
 ```lua
-local ctx = require('exrc').init()
-local path_to_this_file = ctx.exrc_path
-
--- to load first exrc from directories above
-ctx:source_up()
+local dir = vim.fs.dirname(debug.getinfo(1, "S").source:sub(2))
 ```
 
 ### Setting neotest test runners
 
-* note: see [langs](../config/plugins/coding/default.nix) for enabled jest adapters.
+* note: see [langs](../config/plugins/coding/lang/) for enabled jest adapters.
 
 ```lua
-
-local ctx = require("exrc").init()
-local neotest = require('neotest')
+local dir = vim.fs.dirname(debug.getinfo(1, "S").source:sub(2))
 
 require("neotest").setup_project(
-  ctx.exrc_dir,
+  dir,
   vim.tbl_deep_extend("force", require("neotest.config"), {
     adapters = {
       require("neotest-jest")({
@@ -30,7 +26,7 @@ require("neotest").setup_project(
         jestConfigFile = "jest.config.ts",
         env = { CI = true },
         cwd = function()
-          return ctx.exrc_dir
+          return dir
         end,
       }),
     },
@@ -41,4 +37,4 @@ require("neotest").setup_project(
 ## TODO
 
 - Make a simpler wrapper for this.
-- Runtime install of jest adapters?
+- Runtime install of adapters with `vim.pack.add` (Neovim 0.12 or newer).

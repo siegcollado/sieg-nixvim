@@ -12,10 +12,6 @@
     };
 
     # nix plugins not in nixpkgs
-    exrc-nvim = {
-      url = "github:jedrzejboczar/exrc.nvim";
-      flake = false;
-    };
     agentic-nvim = {
       url = "github:carlos-algms/agentic.nvim";
       flake = false;

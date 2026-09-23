@@ -7,7 +7,6 @@
     ./aerial.nix
     ./blink.nix
     ./edgy.nix
-    ./exrc.nix
     ./flash.nix
     ./gitsigns.nix
     ./grug-far.nix

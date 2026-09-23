@@ -32,6 +32,7 @@
     confirm = true;
     cursorline = true;
     expandtab = true;
+    exrc = true;
     fillchars = {
       foldopen = "";
       foldclose = "";

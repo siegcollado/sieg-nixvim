@@ -35,10 +35,7 @@
         ".luarc.jsonc"
         ".editorconfig"
 
-        # for exrc.nvim
         ".nvim.lua"
-        ".nvimrc.lua"
-        ".exrc.lua"
       ];
       settings = {
         Lua = {
