@@ -2,106 +2,20 @@
   inputs,
   lib,
   self,
-  config,
-  withSystem,
   ...
 }:
 let
-  mkPkgs =
-    system:
-    import inputs.nixpkgs {
-      inherit system;
-      overlays = [ self.overlays.default ];
-      config.allowUnfreePredicate =
-        pkg:
-        builtins.elem (lib.getName pkg) [
-          "copilot-language-server"
-          "neotest-vitest"
-          "transparent.nvim"
-        ];
-    };
-
-  mkNixvimConfig =
-    {
-      system,
-      modules ? [ ],
-    }:
-    let
-      pkgs = mkPkgs system;
-    in
-    inputs.nixvim.lib.evalNixvim {
-      inherit system;
-      modules = [
-        { nixpkgs.pkgs = pkgs; }
-        (import ../config)
-      ]
-      ++ modules;
-    };
-  # Setup hook for a project dev shell: adds plugins to the runtimepath of the
-  # base nvim and runs `exrc` (a Lua string) after startup.
-  mkNvimShell =
-    {
-      pkgs,
-      plugins ? [ ],
-      exrc ? null,
-    }:
-    pkgs.writeTextDir "nix-support/setup-hook" ''
-      export NVIM_EXTRA_RTP="${lib.concatStringsSep ":" plugins}''${NVIM_EXTRA_RTP:+:$NVIM_EXTRA_RTP}"
-      ${lib.optionalString (exrc != null) "export NVIM_EXTRA_LUA=${pkgs.writeText "nvim-extra.lua" exrc}"}
-    '';
+  siegLib = import ./lib { inherit inputs lib self; };
 in
 {
   imports = [
     ./overlays.nix
+    ./nixvim.nix
+    ./packages.nix
+    ./shells.nix
   ];
 
-  flake = {
-    nixvimModules.default = ../config;
-    lib = {
-      inherit mkNixvimConfig mkNvimShell;
-    };
-    nixvimConfigurations = lib.genAttrs config.systems (
-      system: withSystem system ({ ... }: mkNixvimConfig { inherit system; })
-    );
-  };
+  _module.args = { inherit siegLib; };
 
-  perSystem =
-    { system, ... }:
-    let
-      # Create pkgs with our custom overlay
-      pkgs = mkPkgs system;
-
-      nixvimLib = inputs.nixvim.lib.${system};
-      nixvim' = inputs.nixvim.legacyPackages.${system};
-      nixvimModule = {
-        inherit pkgs; # Use our custom pkgs with the overlay
-        module = import ../config;
-      };
-      nvim = nixvim'.makeNixvimWithModule nixvimModule;
-    in
-    {
-      checks = {
-        # Run `nix flake check .` to verify that your config is not broken
-        default = nixvimLib.check.mkTestDerivationFromNixvimModule nixvimModule;
-      };
-
-      packages = {
-        # Lets you run `nix run .` to start nixvim
-        default = nvim;
-
-        # no-transparent = nixvim'.makeNixvimWithModule {
-        #   inherit pkgs;
-        #   module = [
-        #     ../config
-        #     { sieg-nixvim.theme.transparent = false; }
-        #   ];
-        # }.config.build.package;
-      };
-
-      devShells = {
-        default = pkgs.mkShell {
-          buildInputs = with pkgs; [ statix ];
-        };
-      };
-    };
+  flake.lib = siegLib;
 }
