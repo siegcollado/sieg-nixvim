@@ -47,5 +47,19 @@ in
     _G.utils.lualine.theme = require_utils("utils.lualine.theme")
     _G.utils.lualine.sections = require_utils("utils.lualine.sections")
     _G.utils.root = require_utils("utils.root")
+
+    for _, dir in ipairs(vim.split(vim.env.NVIM_EXTRA_RTP or "", ":", { trimempty = true })) do
+      vim.opt.rtp:append(dir)
+    end
+
+    local extra_lua = vim.env.NVIM_EXTRA_LUA
+    if extra_lua and extra_lua ~= "" then
+      vim.api.nvim_create_autocmd("VimEnter", {
+        once = true,
+        callback = function()
+          dofile(extra_lua)
+        end,
+      })
+    end
   '';
 }
