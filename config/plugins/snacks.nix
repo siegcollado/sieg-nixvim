@@ -30,18 +30,6 @@
         enable = true;
       };
 
-      lazygit.config.os = {
-        editPreset = "nvim-remote";
-        # 1. Close the floating window
-        # 2. Open the file in the existing buffer
-        edit = lib.strings.join " " [
-          "nvim --server $NVIM --remote-send '<C-\\><C-n><cmd>close<cr>'"
-          "&&"
-          "${lib.getExe pkgs.neovim-remote} --remote {{filename}}"
-        ];
-        editInTerminal = false;
-      };
-
       picker = {
         enable = true;
         win = {
@@ -290,37 +278,6 @@
         end
       '';
       options.desc = "Git Browse (copy)";
-    }
-
-    # Lazygit
-    {
-      mode = "n";
-      key = "<leader>gg";
-      action = lib.nixvim.mkRaw ''
-        function()
-          if vim.fn.executable("lazygit") ~= 1 then
-            vim.notify("lazygit not available", vim.log.levels.WARN)
-            return
-          end
-          local root = _G.utils.root.git()
-          require("snacks").lazygit({ cwd = root })
-        end
-      '';
-      options.desc = "Lazygit (Root Dir)";
-    }
-    {
-      mode = "n";
-      key = "<leader>gG";
-      action = lib.nixvim.mkRaw ''
-        function()
-          if vim.fn.executable("lazygit") ~= 1 then
-            vim.notify("lazygit not available", vim.log.levels.WARN)
-            return
-          end
-          require("snacks").lazygit()
-        end
-      '';
-      options.desc = "Lazygit (cwd)";
     }
 
     # Terminal
