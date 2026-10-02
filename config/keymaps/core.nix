@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   keymaps = [
     # Escape alternatives
@@ -181,5 +182,29 @@
       options.desc = "Scroll up and center";
     }
 
+    # Toggle line numbers
+    {
+      mode = "n";
+      key = "<leader>un";
+      action = lib.nixvim.mkRaw ''
+        function()
+          local show = not vim.wo.number
+          vim.wo.number = show
+          vim.wo.relativenumber = show and vim.g.relative_numbers ~= false
+        end
+      '';
+      options.desc = "Toggle Line Numbers";
+    }
+    {
+      mode = "n";
+      key = "<leader>ur";
+      action = lib.nixvim.mkRaw ''
+        function()
+          vim.g.relative_numbers = vim.g.relative_numbers == false
+          vim.wo.relativenumber = vim.g.relative_numbers and vim.wo.number
+        end
+      '';
+      options.desc = "Toggle Relative Numbers";
+    }
   ];
 }

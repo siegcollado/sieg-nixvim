@@ -55,7 +55,7 @@
       ];
       callback = lib.nixvim.mkRaw ''
         function()
-          if vim.wo.number and vim.api.nvim_get_mode().mode ~= "i" then
+          if vim.g.relative_numbers ~= false and vim.wo.number and vim.api.nvim_get_mode().mode ~= "i" then
             vim.wo.relativenumber = true
           end
         end

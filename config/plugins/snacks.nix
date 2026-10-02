@@ -337,7 +337,7 @@
     {
       mode = "n";
       key = "<leader>ui";
-      action = "vim.show_pos";
+      action = "<cmd>Inspect<cr>";
       options.desc = "Inspect Pos";
     }
     {
