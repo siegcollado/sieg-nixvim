@@ -126,7 +126,7 @@
       };
     */
 
-    tsgo = {
+    tsc = {
       enable = true;
       package = pkgs.typescript;
       config = {
